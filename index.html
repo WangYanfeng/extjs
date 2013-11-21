@@ -1,0 +1,117 @@
+<!documentype html>
+<html>
+	<head>
+		<title>extJs test</title>
+		<link rel="stylesheet" type="text/css" href="/extjs/ext/resources/css/ext-all.css">
+		<script type="text/javascript" src="/extjs/ext/adapter/ext/ext-base.js"></script>
+		<script type="text/javascript" src="/extjs/ext/ext-all-debug.js"></script>
+		<script type="text/javascript">
+			Ext.onReady(function(){
+
+				var north={
+							region:'north',
+							xtype:'panel',
+							height:130,
+							html:'north'
+						};
+				var south={
+							region:'south',
+							xtype:'panel',
+							height:100,
+							html:'south'
+						};
+				var east={
+							region:'east',
+							xtype:'panel',
+							split:true,
+							width:230,
+							html:'east'
+						};
+				var west={
+							region:'west',
+							xtype:'panel',
+							split:true,
+							collapsible:true,
+							collapseModel:'mini',
+							title:'Some Info',
+							bodyStyle:'padding:5px',
+							width:230,
+							minSize:230,
+							html:'west'
+						};
+				var center={
+							region:'center',
+							xtype:'tabpanel',
+							activeTab:0,
+							items:[{
+								title:'Movie Grid',
+								id:"moviegrid"
+							},{
+								title:'Movie Descriptions',
+								html:'MovieInfo'
+							}]
+						};
+				var viewport=new Ext.Viewport({
+					layout:"border",
+					renderTo:Ext.getBody(),
+					items:[north,south,east,west,center]
+				});
+				var data=[
+										[ 
+										   1, 
+										   "Office Space", 
+										   "Mike Judge", 
+										   "1999‐02‐19", 
+										   1, 
+										   "Work Sucks", 
+										   "19.95", 
+										   1 
+									  ],[ 
+										   3, 
+										   "Super Troopers", 
+										   "Jay Chandrasekhar", 
+										   "2002‐02‐15", 
+										   1, 
+										   "Altered State Police", 
+										   "14.95", 
+										   1 
+									  ]
+								];
+				var store=new Ext.data.Store({
+						url: 'movies.json',
+					  reader: new Ext.data.JsonReader({ 
+													  root:'rows', 
+													  id:'id' 
+								  },[
+											  'id',
+												'title',
+												'director',
+												'released',
+												'genre',
+												'tagline',
+												'price',
+												'avaliable'
+									])
+					});
+				var grid=new Ext.grid.GridPanel({
+							renderTo:Ext.get("moviegrid"),
+							frame:true,
+							title:'Movie Grid',
+							store:store,
+							autoExpandColumn:'title',
+							columns:[
+											{header: "Title", dataIndex: 'title'}, 
+								     	{header: "Director", dataIndex: 'director'}, 
+								     	{header: "Released", dataIndex: 'released',renderer:Ext.util.Format.dateRenderer('m/d/Y')}, 
+								     	{header: "Genre", dataIndex: 'genre'}, 
+								     	{header: "Tagline", dataIndex: 'tagline'} 
+							]
+				});
+
+			});
+		</script>
+	</head>
+	<body>
+		<div id="moviegrid"></div>
+	</body>
+</html>
