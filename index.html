@@ -77,21 +77,18 @@
 										   1 
 									  ]
 								];
-				var store=new Ext.data.Store({
-						url: 'movies.json',
-					  reader: new Ext.data.JsonReader({ 
-													  root:'rows', 
-													  id:'id' 
-								  },[
-											  'id',
-												'title',
-												'director',
-												'released',
-												'genre',
-												'tagline',
-												'price',
-												'avaliable'
-									])
+				var store=new Ext.data.SimpleStore({
+						data:data,
+						fields:[
+									  'id',
+										'title',
+										'director',
+										'released',
+										'genre',
+										'tagline',
+										'price',
+										'avaliable'
+							]
 					});
 				var grid=new Ext.grid.GridPanel({
 							renderTo:Ext.get("moviegrid"),
