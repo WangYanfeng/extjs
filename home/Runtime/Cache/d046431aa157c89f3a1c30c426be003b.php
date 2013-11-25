@@ -1,4 +1,4 @@
-<!documentype html>
+<?php if (!defined('THINK_PATH')) exit();?><!documentype html>
 <html>
 	<head>
 		<meta charset="utf-8">
@@ -19,72 +19,63 @@
 								}
 						   },{text:'保存'}
 					);
-
-				var data=[
-										[ 
-										   1, 
-										   "Office Space", 
-										   "Mike Judge", 
-										   "1999‐02‐19", 
-										   1, 
-										   "Work Sucks", 
-										   "19.95", 
-										   1 
-									  ],[ 
-										   3, 
-										   "Super Troopers", 
-										   "Jay Chandrasekhar", 
-										   "2002‐02‐15", 
-										   1, 
-										   "Altered State Police", 
-										   "14.95", 
-										   1 
-									  ]
-								];
-				var store=new Ext.data.SimpleStore({
-						data:data,
-						fields:[
-									  'id',
-										'title',
-										'director',
-										'released',
-										'genre',
-										'tagline',
-										'price',
-										'avaliable'
-							]
-					});
-				var grid=new Ext.grid.GridPanel({
-							renderTo:Ext.get("moviegrid"),
-							frame:true,
-							title:'Movie Grid',
-							store:store,
-							autoExpandColumn:'title',
-							columns:[
-											{header: "Title", dataIndex: 'title'}, 
-								     	{header: "Director", dataIndex: 'director'}, 
-								     	{header: "Released", dataIndex: 'released',renderer:Ext.util.Format.dateRenderer('m/d/Y')}, 
-								     	{header: "Genre", dataIndex: 'genre'}, 
-								     	{header: "Tagline", dataIndex: 'tagline'} 
-							]
-				});
-
 				var fileMenu=new Ext.menu.Menu({
 					items:[{
-						xtype:'textarea',
+						xtype:'textfield',
 						hideLable:true,
 						width:100
 					},{
 						text:"颜色选择",
-						menu:Ext.menu.ColorPicker()
+						menu:Ext.create('Ext.menu.ColorPicker', { value: '000000'})
 					}]
 				});
 				toolbar.add({text:'设置',menu:fileMenu});
+
+				Ext.Ajax.request({
+                url: '__APP__/Index/getInfo',
+                method: 'post',
+                success: function (response, options) {
+                	var data=Ext.util.JSON.decode(response.responseText);
+                },
+                failure: function () {
+                    alert('系统出错，请联系管理人员！');
+                }
+            });
+				var store=new Ext.data.JsonStore({
+						autoDestroy:true,
+						storId:'mystore',
+						proxy:{
+							type:'ajax',
+							url:'__APP__/Index/getInfo',
+							reader:{
+								type:'json',
+								root:'rows',
+								idProperty:'id'
+							}
+						},
+						fields:['id','account','pwd','email','comment','in_time']
+					});
+				store.load();
+				var grid=new Ext.grid.GridPanel({
+							//renderTo:Ext.get("moviegrid"),
+							frame:true,
+							title:'Movie grid',
+							store:store,
+							autoExpandColumn:'title',
+							columns:[
+											{header: "id", dataIndex: 'id'}, 
+								     	{header: "Account", dataIndex: 'account'}, 
+								     	{header: "password", dataIndex: 'pwd'}, 
+								     	{header: "email", dataIndex: 'email'}, 
+								     	{header: "comment", dataIndex: 'comment'} ,
+								     	{header: "in_time", dataIndex: 'in_time'}, 
+							]
+				});
 				var north={
 							region:'north',
 							xtype:'panel',
 							height:130,
-							html:'<div id="toolbar">aa</div>'
+							html:'<div id="toolbar"></div>'
 						};
 				var south={
 							region:'south',
@@ -119,11 +110,11 @@
 								this.add(grid);
 							},
 							items:[{
-								title:'Movie Grid',
-								id:"moviegrid"
-							},{
 								title:'Movie Descriptions',
 								html:'MovieInfo'
+							},{
+								title:'Movie Grid',
+								html:'movie grid'
 							}]
 						};
 				var viewport=new Ext.Viewport({

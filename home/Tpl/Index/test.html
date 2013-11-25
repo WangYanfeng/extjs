@@ -1,0 +1,145 @@
+
+<!documentype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>extJs test</title>
+		<link rel="stylesheet" type="text/css" href="/extjs/ext/resources/css/ext-all.css">
+		<script type="text/javascript" src="/extjs/ext/adapter/ext/ext-base.js"></script>
+		<script type="text/javascript" src="/extjs/ext/ext-all-debug.js"></script>
+		<script type="text/javascript">
+				Ext.onReady(function(){
+					Ext.QuickTips.init();
+					Ext.form.Field.prototype.msgTarget='side';
+					var btnsubmit=new Ext.Button({
+						text:'提交',
+						handler:function(){
+							if(form.getForm().isValid()){
+								Ext.Msg.alert("tip","success");
+						}
+					}
+					});
+					var btnrest=new Ext.Button({
+						text:'重置',
+						listeners:{
+							// 'mouseover':function(){
+							// 	Ext.Msg.alert('tip','mouseover');
+							// },
+							'click':function(){
+								form.getForm().reset();
+							},
+						}
+					});
+					var username=new Ext.form.TextField({
+						width:240,
+						allowBlank:false,
+						labelAlign:'right',
+						labelWidth:60,
+						maxLength:20,
+						name:'username',
+						fieldLabel:'用户名',
+						blankText:'请输入用户名',
+						maxLengthText:'用户名不超过20个字符'
+					});
+					var numberfield=new Ext.form.NumberField({
+						fieldLabel:'身高',
+						labelWidth:60,
+						labelAlign:'right',
+						width:200,
+						decimalPrecision:1,
+						minValue:0.01,
+						maxValue:100,
+						unitText:' cm',
+						allowBlank:false,
+						blankText:'请输入身高'
+					});
+					var hiddenfield=new Ext.form.Hidden({
+						name:'userid',
+						value:'1'
+					});
+					var datefield=new Ext.form.DateField({
+						fieldLabel:'出生日期',
+						labelWidth:60,
+						width:240,
+						format:'Y-m-d',
+						editable:false,
+						allowBlank:false,
+						blankText:'请选择日期'
+					});
+					var checkboxgroup=new Ext.form.CheckboxGroup({
+						fieldLabel:'兴趣爱好',
+						width:240,
+						items:[{
+							boxLabel:'看书',
+							id:'reading',
+							inputValue:'0'
+						},{
+							boxLabel:'上网',
+							id:'internet',
+							inputValue:'1'
+						}]
+					});
+					checkboxgroup.on('change',function(cbgroup,checked){
+						for(var i=0;i<checked.length;i++){
+							alert(checked[i].getRawValue());
+						}
+					});
+					var radiogroup=new Ext.form.RadioGroup({
+						fieldLabel:'性别',
+						width:240,
+						items:[{
+							name:'sex',
+							inputValue: '0',
+							boxLabel:'man',
+							id:'radio1',
+							checked:true
+						},{
+							name:'sex',
+							inputValue:'1',
+							boxLabel:'woman'
+						}]
+					});
+					radiogroup.on('change',function(rdgroup,checked){
+						 alert(checked.getRawValue());
+					});
+					var form=new Ext.form.FormPanel({
+						url:"#",
+						frame:true,
+						//cls:'',
+						buttonAlign:'center',
+						bodyStyle:'padding:4px',
+						items:[username,{
+							xtype:'textfield',
+							labelAlign:'right',
+							labelWidth:60,
+							fieldLabel:'密码',
+							width:240,
+							allowBlank:false,
+							maxLength:20,
+							blankText:'请输入密码',
+							maxLengthText:'密码不能超过20个字符',
+							inputType:'password',
+							name:'password'},numberfield,hiddenfield,datefield,radiogroup,checkboxgroup
+						],
+						buttons:[btnsubmit,btnrest]
+					});
+					var win=new Ext.Window({
+							title:"登陆", height:240, width:320,
+							resizeable:true,modal:true,maximizable:true,
+							plain:true,
+							minimizable:true,
+							items:form
+					});
+					win.on("beforedestroy",function(obj){
+							alert("想关闭我，这是不可能的!");
+							//obj.show();
+							return false;
+					});
+					win.show();
+				});
+		</script>
+	</head>
+	<body>
+		
+	</body>
+</html>
