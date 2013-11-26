@@ -3,11 +3,11 @@
 	<head>
 		<meta charset="utf-8">
 		<title>extJs test</title>
-		<link rel="stylesheet" type="text/css" href="./ext/resources/css/ext-all.css">
-		<link rel="stylesheet" type="text/css" href="/extjs/home/Public/css/main.css">
-		<script type="text/javascript" src="/extjs/ext/adapter/ext/ext-base.js"></script>
-		<script type="text/javascript" src="/extjs/ext/ext-all-debug.js"></script>
-		<script src="/extjs/home/Public/js/south.js"></script>
+		<link rel="stylesheet" type="text/css" href="ext/resources/css/ext-all.css">
+		<link rel="stylesheet" type="text/css" href="home/Public/css/main.css">
+		<script type="text/javascript" src="ext/adapter/ext/ext-base.js"></script>
+		<script type="text/javascript" src="ext/ext-all-debug.js"></script>
+		<script src="home/Public/js/south.js"></script>
 		<script type="text/javascript">
 			Ext.onReady(function(){
 				// Ext.Ajax.request({
