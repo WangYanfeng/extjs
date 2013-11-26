@@ -4,46 +4,24 @@
 		<meta charset="utf-8">
 		<title>extJs test</title>
 		<link rel="stylesheet" type="text/css" href="/extjs/ext/resources/css/ext-all.css">
+		<link rel="stylesheet" type="text/css" href="/extjs/home/Public/css/main.css">
 		<script type="text/javascript" src="/extjs/ext/adapter/ext/ext-base.js"></script>
 		<script type="text/javascript" src="/extjs/ext/ext-all-debug.js"></script>
+		<script src="/extjs/home/Public/js/south.js"></script>
 		<script type="text/javascript">
 			Ext.onReady(function(){
-				var toolbar=new Ext.toolbar.Toolbar({
-					renderTo:'toolbar',
-					width:500
-				});
-				toolbar.add(
-							{text:'新建',
-								handler:function(btn){
-									alert(btn.text);
-								}
-						   },{text:'保存'}
-					);
-				var fileMenu=new Ext.menu.Menu({
-					items:[{
-						xtype:'textfield',
-						hideLable:true,
-						width:100
-					},{
-						text:"颜色选择",
-						menu:Ext.create('Ext.menu.ColorPicker', { value: '000000'})
-					}]
-				});
-				toolbar.add({text:'设置',menu:fileMenu});
-
-				Ext.Ajax.request({
-                url: '__APP__/Index/getInfo',
-                method: 'post',
-                success: function (response, options) {
-                	var data=Ext.util.JSON.decode(response.responseText);
-                },
-                failure: function () {
-                    alert('系统出错，请联系管理人员！');
-                }
-            });
+				// Ext.Ajax.request({
+    //             url: '__APP__/Index/getInfo',
+    //             method: 'post',
+    //             success: function (response, options) {
+    //             	var data=Ext.util.JSON.decode(response.responseText);
+    //             },
+    //             failure: function () {
+    //                 alert('系统出错，请联系管理人员！');
+    //             }
+    //         });
 				var store=new Ext.data.JsonStore({
 						autoDestroy:true,
-						storId:'mystore',
 						proxy:{
 							type:'ajax',
 							url:'__APP__/Index/getInfo',
@@ -72,16 +50,23 @@
 							]
 				});
 				var north={
-							region:'north',
-							xtype:'panel',
-							height:130,
-							html:'<div id="toolbar"></div>'
-						};
+					region:'north',
+					xtype:'panel',
+					height:80,
+					bodyStyle:"background:#abcdef;padding-left:20px",
+					html:'<div id="title">XX管理系统</div>',
+					cls:'header'
+				}
 				var south={
 							region:'south',
 							xtype:'panel',
-							height:100,
-							html:'south'
+							height:250,
+							title:'入库数据',
+							collapsible:true,
+							afterRender:function(){
+								var toolbar=getToolbar();
+								this.add(toolbar);
+							}
 						};
 				var east={
 							region:'east',
@@ -122,10 +107,11 @@
 					renderTo:Ext.getBody(),
 					items:[north,south,east,west,center]
 				});
+				var toolbar=getToolbar();
 			});
 		</script>
 	</head>
 	<body>
-		<div id="toolbar"></div>
+		
 	</body>
 </html>
