@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<title>extJs test</title>
-		<link rel="stylesheet" type="text/css" href="/extjs/ext/resources/css/ext-all.css">
+		<link rel="stylesheet" type="text/css" href="__ROOT__/ext/resources/css/ext-all.css">
 		<link rel="stylesheet" type="text/css" href="/extjs/home/Public/css/main.css">
 		<script type="text/javascript" src="/extjs/ext/adapter/ext/ext-base.js"></script>
 		<script type="text/javascript" src="/extjs/ext/ext-all-debug.js"></script>
