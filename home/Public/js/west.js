@@ -31,11 +31,11 @@ function getTreePanel(){
               expand:true,
               url:'a',
               children:[{
-                          text:'1',
+                          text:'a1',
                           leaf:true,
                           url:'a1'
                       },{
-                          text:'2',
+                          text:'a2',
                           leaf:true,
                           url:'a2'
                       }]
@@ -44,11 +44,11 @@ function getTreePanel(){
               expand:true,
               url:'b',
               children:[{
-                  text:'1',
+                  text:'b1',
                   leaf:true,
                   url:'b1'
               },{
-                  text:'2',
+                  text:'b2',
                   leaf:true,
                   url:'b2'
               }]
@@ -57,6 +57,7 @@ function getTreePanel(){
       root:{
           text:'系统菜单',
           url:'R',
+          expanded:true,
           leaf:false,
           expanded:true
       },
@@ -78,10 +79,15 @@ function getTreePanel(){
       store:menuStore,
       //hrefTarget:'',
       listeners:{
-        itemclick:function(){
-          //alert(11);
+        itemclick:function(view,rec,item,index,e){
+          activePanel(rec,index);
         }
       }
   });
+  function activePanel(rec,index){
+    var panel=rec.get('text');
+    var centerPanel=Ext.getCmp('center');
+    centerPanel.setActiveTab(panel);
+  }
   return treePanel;
 }

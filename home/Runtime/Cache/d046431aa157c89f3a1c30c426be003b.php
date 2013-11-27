@@ -102,13 +102,16 @@
 							activeTab:0,
 							id:'center',
 							items:[{
-								title:'Movie Descriptions',
+								title:'AAAA',
+								id:'a1',
 								html:'MovieInfo'
 							},{
-								title:'Movie Grid',
+								title:'BBBB',
+								id:'a2',
 								html:'movie grid'
 							},{
-								title:'test',
+								title:'CCCC',
+								id:'b1',
 								html:'test'
 							}],
 							listeners:{
