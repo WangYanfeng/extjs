@@ -3,10 +3,10 @@
 	<head>
 		<meta charset="utf-8">
 		<title>extJs test</title>
-		<link rel="stylesheet" type="text/css" href="/extjs/ext/resources/css/ext-all.css">
-		<link rel="stylesheet" type="text/css" href="/extjs/home/Public/css/main.css">
-		<script type="text/javascript" src="/extjs/ext/adapter/ext/ext-base.js"></script>
-		<script type="text/javascript" src="/extjs/ext/ext-all.js"></script>
+		<link rel="stylesheet" type="text/css" href="ext/resources/css/ext-all.css">
+		<link rel="stylesheet" type="text/css" href="home/Public/css/main.css">
+		<script type="text/javascript" src="ext/adapter/ext/ext-base.js"></script>
+		<script type="text/javascript" src="ext/ext-all.js"></script>
 		<script src="home/Public/js/south.js"></script>
 		<script src="home/Public/js/west.js"></script>
 		<script type="text/javascript">
@@ -52,7 +52,6 @@
 				});
 				var north={
 					region:'north',
-					xtype:'panel',
 					height:80,
 					bodyStyle:"background:#abcdef;padding-left:20px",
 					html:'<div id="title">XX管理系统</div>',
@@ -81,7 +80,9 @@
 				var west={
 							region:'west',
 							xtype:'panel',
-							split:true,
+							id:'westPanel',
+							layout:'fit',
+							//split:true,
 							collapsible:true,
 							collapseModel:'mini',
 							title:'Some Info',
@@ -99,12 +100,16 @@
 							region:'center',
 							xtype:'tabpanel',
 							activeTab:0,
+							id:'center',
 							items:[{
 								title:'Movie Descriptions',
 								html:'MovieInfo'
 							},{
 								title:'Movie Grid',
 								html:'movie grid'
+							},{
+								title:'test',
+								html:'test'
 							}],
 							listeners:{
 								afterRender:function(){
