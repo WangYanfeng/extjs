@@ -3,15 +3,15 @@
 	<head>
 		<meta charset="utf-8">
 		<title>extJs test</title>
-		<link rel="stylesheet" type="text/css" href="/ext/resources/css/ext-all.css">
-		<link rel="stylesheet" type="text/css" href="__ROOT__/home/Public/css/main.css">
-		<script type="text/javascript" src="/ext/adapter/ext/ext-base.js"></script>
-		<script type="text/javascript" src="/ext/ext-all.js"></script>
-		<script src="__ROOT__/home/Public/js/toolbar.js"></script>
-		<script src="__ROOT__/home/Public/js/west.js"></script>
-		<script src="__ROOT__/home/Public/js/grid.js"></script>
-		<script src="__ROOT__/home/Public/js/chart.js"></script>
-		<script src="__ROOT__/home/Public/js/chartPie.js"></script>
+		<link rel="stylesheet" type="text/css" href="ext/resources/css/ext-all.css">
+		<link rel="stylesheet" type="text/css" href="home/Public/css/main.css">
+		<script type="text/javascript" src="ext/adapter/ext/ext-base.js"></script>
+		<script type="text/javascript" src="ext/ext-all.js"></script>
+		<script src="home/Public/js/toolbar.js"></script>
+		<script src="home/Public/js/west.js"></script>
+		<script src="home/Public/js/grid.js"></script>
+		<script src="home/Public/js/chart.js"></script>
+		<script src="home/Public/js/chartPie.js"></script>
 		<script type="text/javascript">
 			Ext.onReady(function(){
 				var north={
