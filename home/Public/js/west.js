@@ -21,7 +21,7 @@ function getTreePanel(){
  //  });
 
   //创建菜单数据模型
-  Ext.regModel('Menu',{fields:['text','url']});
+  Ext.regModel('Menu',{fields:['text','url','description']});
   var menuStore=Ext.create('Ext.data.TreeStore',{
       model:'Menu',
       proxy:{
@@ -33,11 +33,13 @@ function getTreePanel(){
               children:[{
                           text:'a1',
                           leaf:true,
-                          url:'a1'
+                          url:'a1',
+                          description:'this is a1'
                       },{
                           text:'a2',
                           leaf:true,
-                          url:'a2'
+                          url:'a2',
+                          description:'this is a2'
                       }]
           },{
               text:'子菜单2',
@@ -46,11 +48,13 @@ function getTreePanel(){
               children:[{
                   text:'b1',
                   leaf:true,
-                  url:'b1'
+                  url:'b1',
+                  description:'this is b1'
               },{
                   text:'b2',
                   leaf:true,
-                  url:'b2'
+                  url:'b2',
+                  description:'this is b2'
               }]
           }]
       },
@@ -68,15 +72,21 @@ function getTreePanel(){
           }
       }
   });
-  function showtitle(url,title){
-      //alert(url);
-      var west=Ext.getCmp('westPanel');
-      west.setTitle(title);
-  }
   var treePanel=Ext.create('Ext.tree.Panel',{
       border:false,
-      width:'100%',
+      width:220,
       store:menuStore,
+      animate:true,
+      fields:['text','description'],
+      columns:[{
+        xtype:'treecolumn',
+        width:160,
+        text:'名称',
+        dataIndex:'text'
+      },{
+        text:'描述',
+        dataIndex:'description'
+      }],
       //hrefTarget:'',
       listeners:{
         itemclick:function(view,rec,item,index,e){
@@ -84,10 +94,15 @@ function getTreePanel(){
         }
       }
   });
-  function activePanel(rec,index){
-    var panel=rec.get('text');
-    var centerPanel=Ext.getCmp('center');
-    centerPanel.setActiveTab(panel);
-  }
   return treePanel;
+}
+function activePanel(rec,index){
+  var panel=rec.get('text');
+  var centerPanel=Ext.getCmp('center');
+  centerPanel.setActiveTab(panel);
+}
+function showtitle(url,title){
+    //alert(url);
+    var west=Ext.getCmp('westPanel');
+    west.setTitle(title);
 }
