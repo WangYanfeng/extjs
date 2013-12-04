@@ -1,7 +1,7 @@
 function getChart(){
 	var dataStore=new Ext.data.JsonStore({
 		fields:['name','percentage'],
-		data:[{name:'<30',percentage:1},
+		data:[{name:'x<30',percentage:1},
 			{name:'30<X<40',percentage:3},
 			{name:'40<x<50',percentage:2},
 			{name:'50<x<60',percentage:2},
@@ -34,8 +34,26 @@ function getChart(){
 			series:[{
 				type:'line',
 				axis:'left',
+				highlight:{
+					size:5,
+					radius:5
+				},
 				xField:'name',
-				yField:'percentage'
+				yField:'percentage',
+				tips: {
+						  trackMouse: true,
+						  width: 140,
+						  height: 28,
+						  renderer: function(storeItem, item) {
+						    this.setTitle(storeItem.get('name') + ': ' + storeItem.get('percentage') + '%');
+						  }
+				},
+				markerConfig: {
+                type: 'cross',
+                size: 4,
+                radius: 4,
+                'stroke-width': 0
+            }
 			}]
 		}]
 	});

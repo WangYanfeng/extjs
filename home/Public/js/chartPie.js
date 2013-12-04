@@ -9,14 +9,16 @@ function getChartPie(){
 	});
 	var chartPie=Ext.create('Ext.panel.Panel',{
 		title:'利润分布图',
+		bodyStyle:"margin:15px",
 		items:[{
 			xtype:'chart',
 			store:dataStore,
-			width:700,
+			width:800,
 			height:500,
 			animate:true,
 			legend:{position:'bottom'},
 			shadow:true,
+			donut:20,
 			series:[{
 				type:'pie',
 				field:'percentage',

@@ -33,7 +33,7 @@
 							xtype:'panel',
 							id:'westPanel',
 							layout:'fit',
-							//split:true,
+							split:true,
 							collapsible:true,
 							collapseModel:'mini',
 							title:'Some Info',
